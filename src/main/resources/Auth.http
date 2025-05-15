@@ -1,0 +1,40 @@
+### 회원가입
+POST http://localhost:8000/user/register
+Content-Type: application/json
+
+{
+  "username": "testuser5645",
+  "password": "Password123!",
+  "email": "test23543@example.com"
+}
+
+### 로그인 (액세스 토큰 + 리프레시 토큰 발급)
+POST http://localhost:8000/user/login
+Content-Type: application/json
+
+{
+  "email": "test@example.com",
+  "password": "Password123!"
+}
+
+### 토큰 갱신 (리프레시 토큰으로 새 액세스 토큰 발급)
+POST http://localhost:8000/user/refresh
+Content-Type: application/json
+
+{
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTY4NTUwMjQwMCwiZXhwIjoxNjg2MTA3MjAwfQ.THIS_IS_A_DUMMY_SIGNATURE_REPLACE_WITH_ACTUAL_TOKEN"
+}
+
+### 인증이 필요한 API 호출 (이미지 생성)
+POST http://localhost:8000/image/generate-image
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTY4NTUwMjQwMCwiZXhwIjoxNjg1NTA2MDAwfQ.THIS_IS_A_DUMMY_SIGNATURE_REPLACE_WITH_ACTUAL_TOKEN
+
+{
+  "prompt": "A beautiful sunset over the ocean",
+  "user_id": 1
+}
+
+### 인증이 필요한 API 호출 (앨범 목록 조회)
+GET http://localhost:8000/image/album
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJ0ZXN0QGV4YW1wbGUuY29tIiwidXNlcm5hbWUiOiJ0ZXN0dXNlciIsImlhdCI6MTY4NTUwMjQwMCwiZXhwIjoxNjg1NTA2MDAwfQ.THIS_IS_A_DUMMY_SIGNATURE_REPLACE_WITH_ACTUAL_TOKEN
